@@ -1,5 +1,9 @@
 .pixel {
-    fill: none;
+    fill: white;
     stroke-width: 0.5;
     stroke: gray;
+}
+
+.clicked {
+    fill: black;
 }
