@@ -1,3 +1,5 @@
 .pixel {
-    stroke:red;
+    fill: none;
+    stroke-width: 0.5;
+    stroke: gray;
 }
