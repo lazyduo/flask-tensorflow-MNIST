@@ -1,4 +1,16 @@
+
 {% extends "index.html" %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+{% endblock %}
 {% block content%}
-    <p> Hi this is classify html </p>
+
+    <svg width="100%" viewbox="0 0 560 560">
+        {% for i in px_size %}
+            {% for j in px_size %}
+                <rect class="pixel" x={{ j * 10 }} y={{ i * 10 }} width="10" height="10" fill=none stroke-width="0.5"/>
+            {% endfor %}
+        {% endfor %}
+    </svg>
 {% endblock %}

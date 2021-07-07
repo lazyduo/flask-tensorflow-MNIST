@@ -8,4 +8,5 @@ def home():
 
 @app.route('/classify')
 def classify():
-    return render_template('tensorflow/classify.html')
+    px_size = range(28)
+    return render_template('tensorflow/classify.html', px_size=px_size)
