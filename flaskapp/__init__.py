@@ -19,10 +19,11 @@ def getData():
     data = request.form['bitmap']
 
     img = np.asarray(list(map(int, data))).reshape((28, 28))
+    print(img)
     img = (np.expand_dims(img,0))
+    answer= classify_digit(img)
 
-    print(classify_digit(img))
     response = {
-        'data': 'hello'
+        'answer': str(answer)
     }
     return json.dumps(response)
