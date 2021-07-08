@@ -10,11 +10,14 @@
 {% endblock %}
 {% block content%}
 
-    <svg width="100%" viewbox="0 0 560 560">
+    <svg width="50%" viewbox="0 0 280 280">
         {% for i in px_size %}
             {% for j in px_size %}
                 <rect class="pixel" x={{ j * 10 }} y={{ i * 10 }} width="10" height="10"/>
             {% endfor %}
         {% endfor %}
     </svg>
+    <div>
+        <button id="clear_btn">Clear</button>
+    </div>
 {% endblock %}
