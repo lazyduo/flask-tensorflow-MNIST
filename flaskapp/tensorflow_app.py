@@ -30,16 +30,16 @@ def create_probability_model():
 
 # model.save_weights('./checkpoints/model_weights')
 
-def classify_digit(x_test):
+def classify_digit(img):
     probability_model = create_probability_model()
     probability_model.load_weights('./checkpoints/model_weights')
 
 
-    predictions = probability_model.predict(x_test)
+    predictions = probability_model.predict(img)
 
     answer = np.argmax(predictions[0])
 
-    print(f'prediction of first image : {answer}')
+    print(f'prediction of image : {answer}')
     return answer
 
 if __name__ == '__main__':
@@ -48,14 +48,14 @@ if __name__ == '__main__':
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
     x_train, x_test = x_train / 255.0, x_test / 255.0
 
-    img_array = [[0]*28]*28
-    img = np.asarray(img_array)
+    # img_array = [[0]*28]*28
+    # img = np.asarray(img_array)
 
 
-    print(img.shape)
+    # print(img.shape)
 
-    img = (np.expand_dims(img,0))
+    # img = (np.expand_dims(img,0))
 
-    print(img.shape)
+    # print(img.shape)
 
-    classify_digit(img)
+    # classify_digit(img)

@@ -31,10 +31,10 @@ document.addEventListener("DOMContentLoaded", function(){
         for (var i = 0; i < className.length; i++) {
             className[i].classList.remove("clicked");
         }
-        bitmap = '';
     }
 
     var classify_bitmap = function() {
+        bitmap = '';
         for (var i = 0; i < className.length; i++) {
             if (className[i].classList != "pixel"){
                 bitmap += '1'
@@ -43,7 +43,16 @@ document.addEventListener("DOMContentLoaded", function(){
                 bitmap += '0'
             }
         }
-        console.log(bitmap);
+        $.ajax({
+            url: '/getData',
+            type: 'POST',
+            data: {
+                'bitmap': bitmap,
+            },
+            success: function(data) {
+                console.log(data);
+            }
+        })
     }
 
     clear_btn.addEventListener('click', clear_bitmap, false);
