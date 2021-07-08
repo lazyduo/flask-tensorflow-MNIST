@@ -12,8 +12,10 @@ document.addEventListener("DOMContentLoaded", function(){
 
     // handling pixel bitmap
     var className = document.getElementsByClassName("pixel");
-    var clear_btn = document.getElementById("clear_btn")
-    
+    var clear_btn = document.getElementById("clear_btn");
+    var classify_btn = document.getElementById("classify_btn");
+    var bitmap = ''
+
     var fill_bitmap = function() {
         if (mouseDown) {
             this.classList.add("clicked");
@@ -29,8 +31,22 @@ document.addEventListener("DOMContentLoaded", function(){
         for (var i = 0; i < className.length; i++) {
             className[i].classList.remove("clicked");
         }
+        bitmap = '';
+    }
+
+    var classify_bitmap = function() {
+        for (var i = 0; i < className.length; i++) {
+            if (className[i].classList != "pixel"){
+                bitmap += '1'
+            }
+            else {
+                bitmap += '0'
+            }
+        }
+        console.log(bitmap);
     }
 
     clear_btn.addEventListener('click', clear_bitmap, false);
+    classify_btn.addEventListener('click', classify_bitmap, false);
 });
 

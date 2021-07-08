@@ -40,7 +40,7 @@ def classify_digit(x_test):
     answer = np.argmax(predictions[0])
 
     print(f'prediction of first image : {answer}')
-    return
+    return answer
 
 if __name__ == '__main__':
     mnist = tf.keras.datasets.mnist
