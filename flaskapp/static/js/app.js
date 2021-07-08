@@ -49,8 +49,8 @@ document.addEventListener("DOMContentLoaded", function(){
             data: {
                 'bitmap': bitmap,
             },
-            success: function(data) {
-                console.log(data);
+            success: function(res) {
+                console.log(res);
             }
         })
     }
