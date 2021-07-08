@@ -21,8 +21,8 @@ def home():
 @app.route('/classify')
 def classify():
     px_size = range(28)
-    loss = '{:.2f}'.format(g.loss)
-    accuracy = '{:.2f}'.format(g.accuracy)
+    loss = '{:.5f}'.format(g.loss)
+    accuracy = '{:.5f}'.format(g.accuracy)
     return render_template('tensorflow/classify.html', px_size=px_size, loss=loss, accuracy=accuracy)
 
 @app.route('/getPrediction', methods=['POST'])
@@ -46,7 +46,8 @@ def calcModelWeights():
     loss = context['loss']
     accuracy = context['accuracy']
     response = {
-        'loss': f'{loss:.2f}',
-        'accuracy': f'{accuracy:.2f}',
+        'loss': f'{loss:.5f}',
+        'accuracy': f'{accuracy:.5f}',
     }
+    print(response)
     return json.dumps(response)

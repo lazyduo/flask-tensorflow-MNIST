@@ -70,6 +70,9 @@ document.addEventListener("DOMContentLoaded", function(){
                 console.log(res)
                 $("button").prop('disabled', false);
                 $('#status').text('Model update complete!!');
+
+                let response = jQuery.parseJSON(res);
+                $('#model_info').text('Model Information (loss: ' + response.loss + ', accuracy: ' + response.accuracy + ')')
             }
 
         })
