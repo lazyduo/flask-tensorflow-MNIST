@@ -8,8 +8,11 @@ app = Flask(__name__)
 @app.before_request
 def before_request():
     print("before request : get model information...")
-    g.model = 'a'
-    print(g.model)
+
+    with open("model.json", "r") as json_file:
+        d = json.load(json_file)
+        g.loss = d['loss']
+        g.accuracy = d['accuracy']
 
 @app.route('/')
 def home():
@@ -18,7 +21,9 @@ def home():
 @app.route('/classify')
 def classify():
     px_size = range(28)
-    return render_template('tensorflow/classify.html', px_size=px_size)
+    loss = '{:.2f}'.format(g.loss)
+    accuracy = '{:.2f}'.format(g.accuracy)
+    return render_template('tensorflow/classify.html', px_size=px_size, loss=loss, accuracy=accuracy)
 
 @app.route('/getPrediction', methods=['POST'])
 def getPrediction():

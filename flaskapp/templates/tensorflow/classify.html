@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 {% endblock %}
 {% block content%}
+    <div>
+        <p>Model Information (loss: {{ loss }}, accuracy: {{ accuracy }})</p>
+    </div>
 
     <svg width="50%" viewbox="0 0 280 280">
         {% for i in px_size %}

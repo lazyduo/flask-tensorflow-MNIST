@@ -1,6 +1,7 @@
 import tensorflow as tf
 import numpy as np
-
+import json
+import os
 
 
 def create_probability_model():
@@ -35,6 +36,9 @@ def calc_model_weights():
         'accuracy': accuracy
     }
 
+    with open("./model.json", "w") as json_file:
+        json.dump(context, json_file)
+
     return context
 
 def classify_digit(img):
@@ -50,7 +54,5 @@ def classify_digit(img):
     return answer
 
 if __name__ == '__main__':
-    mnist = tf.keras.datasets.mnist
-
-    (x_train, y_train), (x_test, y_test) = mnist.load_data()
-    x_train, x_test = x_train / 255.0, x_test / 255.0
+    print(__file__)
+    print(os.getcwd())
