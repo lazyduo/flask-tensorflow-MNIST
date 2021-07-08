@@ -7,3 +7,13 @@
 .clicked {
     fill: black;
 }
+
+#status {
+    color: red;
+    text-transform: uppercase;
+}
+
+#answer {
+    color: blue;
+    font-size: 20px;
+}

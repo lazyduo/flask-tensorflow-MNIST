@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function(){
             className[i].classList.remove("clicked");
         }
         $('#answer').text("Click 'Classify' button!");
+        $('#status').text('');
     }
 
     var classify_bitmap = function() {
@@ -53,13 +54,14 @@ document.addEventListener("DOMContentLoaded", function(){
             },
             success: function(res) {
                 let response = jQuery.parseJSON(res);
-                $('#answer').text('Answer is : ' + response.answer);
+                $('#answer').text('Hmm... This is ' + response.answer + '!!!!!!');
             }
         })
     }
 
     var model_update = function(){
         $("button").prop('disabled', true);
+        $('#status').text('Warning! Model is now updating...');
         $.ajax({
             url: '/calcModelWeights',
             type: 'POST',
@@ -67,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function(){
             success: function(res){
                 console.log(res)
                 $("button").prop('disabled', false);
+                $('#status').text('Model update complete!!');
             }
 
         })
