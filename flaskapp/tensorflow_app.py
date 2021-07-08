@@ -20,15 +20,17 @@ def create_probability_model():
 
     return model
 
+def calc_model_weights():
+    mnist = tf.keras.datasets.mnist
 
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    x_train, x_test = x_train / 255.0, x_test / 255.0
 
-# model = create_probability_model()
+    model = create_probability_model()
+    model.fit(x_train, y_train, epochs=5)
+    model.save_weights('./checkpoints/model_weights')
 
-# model.fit(x_train, y_train, epochs=5)
-
-# model.evaluate(x_test, y_test, verbose=2)
-
-# model.save_weights('./checkpoints/model_weights')
+    return model.evaluate(x_test, y_test, verbose=2)
 
 def classify_digit(img):
     probability_model = create_probability_model()
@@ -47,15 +49,3 @@ if __name__ == '__main__':
 
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
     x_train, x_test = x_train / 255.0, x_test / 255.0
-
-    # img_array = [[0]*28]*28
-    # img = np.asarray(img_array)
-
-
-    # print(img.shape)
-
-    # img = (np.expand_dims(img,0))
-
-    # print(img.shape)
-
-    # classify_digit(img)

@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function(){
     var className = document.getElementsByClassName("pixel");
     var clear_btn = document.getElementById("clear_btn");
     var classify_btn = document.getElementById("classify_btn");
+    var modelupdate_btn = document.getElementById("modelupdate_btn");
     var bitmap = ''
 
     var fill_bitmap = function() {
@@ -31,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function(){
         for (var i = 0; i < className.length; i++) {
             className[i].classList.remove("clicked");
         }
+        $('#answer').text("Click 'Classify' button!");
     }
 
     var classify_bitmap = function() {
@@ -44,18 +46,32 @@ document.addEventListener("DOMContentLoaded", function(){
             }
         }
         $.ajax({
-            url: '/getData',
+            url: '/getPrediction',
             type: 'POST',
             data: {
                 'bitmap': bitmap,
             },
             success: function(res) {
-                console.log(res);
+                let response = jQuery.parseJSON(res);
+                $('#answer').text('Answer is : ' + response.answer);
             }
+        })
+    }
+
+    var model_update = function(){
+        $.ajax({
+            url: '/calcModelWeights',
+            type: 'POST',
+            data: {},
+            success: function(res){
+                console.log(res)
+            }
+
         })
     }
 
     clear_btn.addEventListener('click', clear_bitmap, false);
     classify_btn.addEventListener('click', classify_bitmap, false);
+    modelupdate_btn.addEventListener('click', model_update, false);
 });
 
