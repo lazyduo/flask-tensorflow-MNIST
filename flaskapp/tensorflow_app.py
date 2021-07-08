@@ -1,38 +1,61 @@
 import tensorflow as tf
 import numpy as np
 
-mnist = tf.keras.datasets.mnist
 
-(x_train, y_train), (x_test, y_test) = mnist.load_data()
-x_train, x_test = x_train / 255.0, x_test / 255.0
 
-print(x_test.shape)
-print(x_test[0])
+def create_probability_model():
+    model = tf.keras.models.Sequential([
+    tf.keras.layers.Flatten(input_shape=(28, 28)),
+    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.Dropout(0.2),
+    tf.keras.layers.Dense(10),
+    tf.keras.layers.Softmax()
+    ])
 
-# model = tf.keras.models.Sequential([
-#   tf.keras.layers.Flatten(input_shape=(28, 28)),
-#   tf.keras.layers.Dense(128, activation='relu'),
-#   tf.keras.layers.Dropout(0.2),
-#   tf.keras.layers.Dense(10)
-# ])
+    loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
 
-# loss_fn = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
+    model.compile(optimizer='adam',
+              loss=loss_fn,
+              metrics=['accuracy'])
 
-# model.compile(optimizer='adam',
-#               loss=loss_fn,
-#               metrics=['accuracy'])
+    return model
+
+
+
+# model = create_probability_model()
 
 # model.fit(x_train, y_train, epochs=5)
 
 # model.evaluate(x_test, y_test, verbose=2)
 
-# probability_model = tf.keras.Sequential([
-#   model,
-#   tf.keras.layers.Softmax()
-# ])
+# model.save_weights('./checkpoints/model_weights')
 
-# predictions = probability_model.predict(x_test)
+def classify_digit(x_test):
+    probability_model = create_probability_model()
+    probability_model.load_weights('./checkpoints/model_weights')
 
-# answer = np.argmax(predictions[0])
 
-# print(f'prediction of first image : {answer}')
+    predictions = probability_model.predict(x_test)
+
+    answer = np.argmax(predictions[0])
+
+    print(f'prediction of first image : {answer}')
+    return
+
+if __name__ == '__main__':
+    mnist = tf.keras.datasets.mnist
+
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    x_train, x_test = x_train / 255.0, x_test / 255.0
+
+    img_array = [[0]*28]*28
+    img = np.asarray(img_array)
+
+
+    print(img.shape)
+
+    img = (np.expand_dims(img,0))
+
+    print(img.shape)
+
+    classify_digit(img)
