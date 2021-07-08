@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", function(){
     // Handler when the DOM is fully loaded
 
-    // mouseDown
+    // mouseDown handling
     var mouseDown = 0;
     document.body.onmousedown = function() { 
-        ++mouseDown;
+        mouseDown = 1;
     }
     document.body.onmouseup = function() {
-        --mouseDown;
+        mouseDown = 0;
     }
 
     // handling pixel bitmap
@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     };
 
-    for (var i = 0; i < className.length; i++) {
+    for (var i = 0; i < className.length; i++) {  
         className[i].addEventListener('mouseover', fill_bitmap, false);
     }
 
