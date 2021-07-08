@@ -59,12 +59,14 @@ document.addEventListener("DOMContentLoaded", function(){
     }
 
     var model_update = function(){
+        $("button").prop('disabled', true);
         $.ajax({
             url: '/calcModelWeights',
             type: 'POST',
             data: {},
             success: function(res){
                 console.log(res)
+                $("button").prop('disabled', false);
             }
 
         })

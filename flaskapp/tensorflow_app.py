@@ -29,8 +29,13 @@ def calc_model_weights():
     model = create_probability_model()
     model.fit(x_train, y_train, epochs=5)
     model.save_weights('./checkpoints/model_weights')
+    loss, accuracy = model.evaluate(x_test, y_test, verbose=2)
+    context ={
+        'loss': loss,
+        'accuracy': accuracy
+    }
 
-    return model.evaluate(x_test, y_test, verbose=2)
+    return context
 
 def classify_digit(img):
     probability_model = create_probability_model()
